@@ -6,7 +6,7 @@ This repository contains my submissions for the **Datheon Python Programming Int
 - [Project Structure](#project-structure)
 - [Requirements](#requirements)
 - [Task 1: Hangman Word Guessing Game](#task-1-hangman-word-guessing-game)
-- [Task 2: TASK NAME HERE](#task-2-task-name-here)
+- [Task 2: Stock Portfolio Performance Tracker](#task-2-stock-portfolio-performance-tracker)
 - [Skills Demonstrated](#skills-demonstrated)
 - [Author](#author)
 
@@ -18,8 +18,10 @@ Datheon_Python_Programming_Internship/
 ├── Task1_Hangman/
 │   ├── hangman.py
 │   └── words.txt          (optional custom word list)
-└── Task2_TASK_FOLDER/
-    └── task2_file.py
+└── Task2_Portfolio_Tracker/
+    ├── portfolio.py
+    ├── sample_prices.csv
+    └── portfolio_summary.csv   (generated)
 ```
 
 ## Requirements
@@ -82,20 +84,40 @@ String manipulation, sets, lists, loops, functions (modular design), file handli
 
 ---
 
-## Task 2: TASK NAME HERE
+## Task 2: Stock Portfolio Performance Tracker
 
-Short description of what the program does.
+A console utility that tracks an investment portfolio. The user enters ticker symbols, buy prices and share quantities; the program calculates portfolio value and gain/loss, then logs the results to a CSV file.
 
 ### Features
-- Feature 1
-- Feature 2
-- Feature 3
+- Menu-driven interface: add, view, remove positions, save summary, exit
+- Positions stored in a dictionary; re-adding a ticker merges it using weighted-average cost
+- Current prices loaded from a CSV file (`sample_prices.csv`); column names (Symbol/Ticker, Price/Close) are detected automatically
+- Manual price entry if a ticker is not found in the dataset
+- Calculates invested capital, market value, gain/loss and gain/loss % per holding and for the whole portfolio
+- Neatly formatted console table with a PROFIT / LOSS status
+- Writes `portfolio_summary.csv` (with timestamp and a TOTAL row) using Python's built-in `csv` module
+- Input validation and safe file handling
 
 ### How to Run
 ```bash
-cd Task2_TASK_FOLDER
-python task2_file.py
+cd Task2_Portfolio_Tracker
+python portfolio.py
 ```
+
+### Sample Output
+```
+Ticker     Shares      Buy $      Now $     Invested        Value    Gain/Loss        %
+AAPL        15.00     203.33     228.50     3,050.00     3,427.50      +377.50  +12.38%
+XYZ          4.00      50.00      88.00       200.00       352.00      +152.00  +76.00%
+TOTAL                                       3,250.00     3,779.50      +529.50  +16.29%
+Overall portfolio status: PROFIT
+```
+
+### Using the S&P 500 Dataset
+Download the provided CSV, place it in the `Task2_Portfolio_Tracker` folder, and change `PRICES_FILE` at the top of `portfolio.py` to its file name.
+
+### Concepts Used
+Dictionaries, CSV reading/writing, file I/O, functions, loops, input validation, number formatting, error handling.
 
 ---
 
