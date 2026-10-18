@@ -7,6 +7,7 @@ This repository contains my submissions for the **Datheon Python Programming Int
 - [Requirements](#requirements)
 - [Task 1: Hangman Word Guessing Game](#task-1-hangman-word-guessing-game)
 - [Task 2: Stock Portfolio Performance Tracker](#task-2-stock-portfolio-performance-tracker)
+- [Task 3: Automated File Organizer & Cleanup Utility](#task-3-automated-file-organizer--cleanup-utility)
 - [Skills Demonstrated](#skills-demonstrated)
 - [Author](#author)
 
@@ -18,10 +19,12 @@ Datheon_Python_Programming_Internship/
 ├── Task1_Hangman/
 │   ├── hangman.py
 │   └── words.txt          (optional custom word list)
-└── Task2_Portfolio_Tracker/
-    ├── portfolio.py
-    ├── sample_prices.csv
-    └── portfolio_summary.csv   (generated)
+├── Task2_Portfolio_Tracker/
+│   ├── portfolio.py
+│   ├── sample_prices.csv
+│   └── portfolio_summary.csv   (generated)
+└── Task3_File_Organizer/
+    └── organizer.py
 ```
 
 ## Requirements
@@ -121,6 +124,56 @@ Dictionaries, CSV reading/writing, file I/O, functions, loops, input validation,
 
 ---
 
+## Task 3: Automated File Organizer & Cleanup Utility
+
+A desktop automation script that cleans up cluttered folders (e.g. Downloads) by sorting every file into category subfolders based on its extension.
+
+### Features
+- Extension-to-category mapping dictionary: Documents, Images, Videos, Audio, Archives, Code, Others
+- Uses `os.scandir()` to inspect files and `shutil.move()` to relocate them (`pathlib` for paths)
+- Category folders are created dynamically, only when needed
+- **Collision-safe:** if a file with the same name exists, the new one becomes `name (1).ext` instead of being overwritten
+- `try/except` handling for `PermissionError`, `FileExistsError` and other `OSError`s: one bad file never stops the run
+- **Dry-run mode** (`--dry-run`) to preview changes without moving anything
+- Confirmation prompt before moving (skip with `--yes`)
+- Skips hidden files, the script itself and the log file
+- Logging to console and `organizer.log`, plus a formatted execution summary
+
+### How to Run
+```bash
+cd Task3_File_Organizer
+python organizer.py                          # asks for a folder (default: ~/Downloads)
+python organizer.py "path/to/folder"         # organize a specific folder
+python organizer.py "path/to/folder" --dry-run   # preview only
+python organizer.py "path/to/folder" --yes       # no confirmation prompt
+```
+
+### Sample Output
+```
+========================================
+  EXECUTION SUMMARY
+========================================
+  Folder           : /home/user/messy_folder
+  Files relocated  : 8
+      Archives     1
+      Audio        1
+      Code         1
+      Documents    1
+      Images       2
+      Others       1
+      Videos       1
+  Renamed (collide): 1
+  Skipped          : 1
+  Errors           : 0
+  Log file         : organizer.log
+========================================
+```
+
+### Concepts Used
+`os`, `shutil`, `pathlib`, `argparse`, `logging`, dictionaries, exception handling, filesystem automation.
+
+---
+
 ## Skills Demonstrated
 - Writing clean, modular Python code
 - Working with strings, sets, and control flow
@@ -129,5 +182,4 @@ Dictionaries, CSV reading/writing, file I/O, functions, loops, input validation,
 
 ## Author
 **YOUR NAME**
-GitHub: [@your-username](https://github.com/your-username)
-LinkedIn: [Your Name](https://www.linkedin.com/in/your-profile)
+GitHub: [@Dharani321-S](https://github.com/Dharani321-S)
